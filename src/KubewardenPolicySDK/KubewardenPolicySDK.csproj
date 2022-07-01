@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition= " '$(Configuration)' == 'Debug' ">
+    <DocumentationFile>bin\Debug\net7.0\KubewardenPolicySDK.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>

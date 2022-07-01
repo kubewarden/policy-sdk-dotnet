@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="KubernetesClient.Models" Version="8.0.12" />
+    <PackageReference Include="WapcGuest" Version="0.1.1" />
+    <PackageReference Include="Wasi.Sdk" Version="0.1.1" />
+
+    <!-- Only needed when referencing the dependencies as projects. For package references, these are imported automatically. -->
+    <ProjectReference Include="..\..\src\KubewardenPolicySDK\KubewardenPolicySDK.csproj" />
+  </ItemGroup>
+
+</Project>
