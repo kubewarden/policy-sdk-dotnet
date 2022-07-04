@@ -1,0 +1,34 @@
+on:
+  - push
+  - pull_request
+
+name: Continuous integration
+
+jobs:
+  example-policy-tests:
+    name: Test suite of example policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '7.0.x'
+          include-prerelease: true
+      - run: dotnet test example/MyFirstKubewardenPolicy.Tests
+
+  example-policy-e2e-tests:
+    name: Run e2e tests of the example policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '7.0.x'
+          include-prerelease: true
+      -
+        name: Install dependencies
+        uses: kubewarden/github-actions/policy-gh-action-dependencies@v1
+      - name: Run e2e tests
+        run: |
+          cd example/MyFirstKubewardenPolicy
+          make e2e-tests

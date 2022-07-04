@@ -10,4 +10,4 @@ e2e-tests: annotated-policy.wasm
 
 .PHONY: clean
 clean:
-	rm -rf bin obj
+	rm -rf bin obj annotated-policy.wasm
