@@ -33,7 +33,8 @@ Start by creating a Console application:
 dotnet new console -o MyFirstKubewardenPolicy
 cd MyFirstKubewardenPolicy
 dotnet add package Wasi.Sdk --prerelease
-dotnet add package Kubewarden.Sdk
+dotnet add package WapcGuest
+dotnet add package KubewardenPolicySDK
 ```
 
 Edit the `Program.cs` file and replace its contents to match the following ones:
