@@ -13,12 +13,21 @@ using the C# programming language.
 This is a first iteration of the SDK, it can be used to create both validating
 and mutating policies.
 
+## Limitations
+
 However, the following host capabilities are not exposed yet:
 
 * [ ] Logging
 * [ ] [Signature verification](https://docs.kubewarden.io/writing-policies/spec/host-capabilities/signature-verifier-policies)
 * [ ] [Container registry operations](https://docs.kubewarden.io/writing-policies/spec/host-capabilities/container-registry)
 * [ ] [Network capabilities](https://docs.kubewarden.io/writing-policies/spec/host-capabilities/net)
+
+Currently the size of the final WebAssembly modules is pretty big (~26 Mb). The
+startup time is however reasonable.
+
+Trying to enable the experimental property `<WasiTrim>true</WasiTrim>` causes
+the compilation to fail. The issue has been reported to the author of
+[`dot-net-wasi-sdk`](https://github.com/SteveSandersonMS/dotnet-wasi-sdk).
 
 ## Requirements
 
