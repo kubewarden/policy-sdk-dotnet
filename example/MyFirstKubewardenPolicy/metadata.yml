@@ -1,0 +1,94 @@
+rules:
+- apiGroups: ["networking.k8s.io"]
+  apiVersions: ["v1"]
+  resources: ["ingresses"]
+  operations: ["CREATE", "UPDATE"]
+mutating: true
+contextAware: false
+annotations:
+  io.kubewarden.policy.title: ingress-default-backend
+  io.kubewarden.policy.description: Do not allow Ingress resources to have a default backend
+  io.kubewarden.policy.author: Flavio Castelli
+  io.kubewarden.policy.url: https://github.com/kubewarden
+  io.kubewarden.policy.source: https://github.com/kubewarden
+  io.kubewarden.policy.license: Apache-2.0
+  io.kubewarden.policy.usage: |
+    An Ingress with no rules sends all traffic to a single default backend and
+    .spec.defaultBackend` is the backend that should handle requests in that case.
+    The `defaultBackend` is conventionally a configuration option of the Ingress
+    controller and is not specified in your Ingress resources.
+    If no `.spec.rules` are specified, `.spec.defaultBackend` must be specified.
+    If `defaultBackend` is not set, the handling of requests that do not match any
+    of the rules will be up to the ingress controller.
+
+    It's considered a good security practice to have users specify rules and not
+    be able to manually pick the `defaultBackend`.
+
+    This policy prohibits users from specifying  the `defaultBackend`. It can
+    reject Ingress objects that have one specified or, when the `wipe_default_backend`
+    setting is enabled, it can mutate an Ingress object to enforce no `defaultBackend`
+    is in place.
+
+    ## Settings
+
+    The following settings are accepted:
+
+    * `wipe_default_backend`: default value is `false`. When set to `false`, the policy
+      rejects invalid Ingress objects. When set to `true` the policy mutates the Ingress
+      objects that have a `defaultBackend` and removes the value specified by the user.
+
+    ### Example
+
+    Let's assume the following Ingress object is about to be created:
+
+    ``` yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: ingress-resource-backend
+    spec:
+      defaultBackend:
+        resource:
+          apiGroup: k8s.example.com
+          kind: StorageBucket
+          name: static-assets
+      rules:
+        - http:
+            paths:
+              - path: /icons
+                pathType: ImplementationSpecific
+                backend:
+                  resource:
+                    apiGroup: k8s.example.com
+                    kind: StorageBucket
+                    name: icon-assets
+    ```
+
+    This policy, without any configuration value, would reject the creation of the
+    Ingress.
+
+    On the other hand, the policy deployed with this configuration:
+
+    ```yaml
+    wipe_default_backend: true
+    ```
+
+    Would lead to the creation of this Ingress resource:
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: ingress-resource-backend
+    spec:
+      rules:
+        - http:
+            paths:
+              - path: /icons
+                pathType: ImplementationSpecific
+                backend:
+                  resource:
+                    apiGroup: k8s.example.com
+                    kind: StorageBucket
+                    name: icon-assets
+    ```
