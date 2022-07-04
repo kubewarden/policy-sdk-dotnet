@@ -3,6 +3,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Set of helper methods used to write Kubewarden policies.
+/// </summary>
 public class Kubewarden
 {
   /// <summary>
