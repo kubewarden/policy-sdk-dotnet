@@ -10,6 +10,16 @@
 This library provides a SDK that can be used to write [Kubewarden Policies](https://kubewarden.io)
 using the C# programming language.
 
+This is a first iteration of the SDK, it can be used to create both validating
+and mutating policies.
+
+However, the following host capabilities are not exposed yet:
+
+* [ ] Logging
+* [ ] [Signature verification](https://docs.kubewarden.io/writing-policies/spec/host-capabilities/signature-verifier-policies)
+* [ ] [Container registry operations](https://docs.kubewarden.io/writing-policies/spec/host-capabilities/container-registry)
+* [ ] [Network capabilities](https://docs.kubewarden.io/writing-policies/spec/host-capabilities/net)
+
 ## Requirements
 
 The code requires .NET 7, which is currently (as of July 2022) in preview mode.
