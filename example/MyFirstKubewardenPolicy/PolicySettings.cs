@@ -4,7 +4,7 @@ using KubewardenPolicySDK;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-class PolicySettings
+public class PolicySettings
 {
   [JsonPropertyName("wipe_default_backend")]
   public bool? WipeDefaultBackend { get; set; }

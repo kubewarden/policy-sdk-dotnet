@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstKubewardenPolicy", "MyFirstKubewardenPolicy\MyFirstKubewardenPolicy.csproj", "{1671BFDB-7FA1-430A-BE25-767E206DC933}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstKubewardenPolicy.Tests", "MyFirstKubewardenPolicy.Tests\MyFirstKubewardenPolicy.Tests.csproj", "{6A988F4C-8EBC-45E2-9BD3-F3D6E49EB293}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1671BFDB-7FA1-430A-BE25-767E206DC933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1671BFDB-7FA1-430A-BE25-767E206DC933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1671BFDB-7FA1-430A-BE25-767E206DC933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1671BFDB-7FA1-430A-BE25-767E206DC933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A988F4C-8EBC-45E2-9BD3-F3D6E49EB293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A988F4C-8EBC-45E2-9BD3-F3D6E49EB293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A988F4C-8EBC-45E2-9BD3-F3D6E49EB293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A988F4C-8EBC-45E2-9BD3-F3D6E49EB293}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

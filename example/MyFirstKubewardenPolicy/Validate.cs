@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using k8s.Models;
 
 
-class Validator
+public class Validator
 {
   public static byte[] Validate(byte[] payload)
   {
