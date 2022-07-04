@@ -7,7 +7,7 @@
 >
 > It also requires usage of .NET 7, which is currently in preview.
 
-This crate provides a SDK that can be used to write [Kubewarden Policies](https://kubewarden.io)
+This repository provides a SDK that can be used to write [Kubewarden Policies](https://kubewarden.io)
 using the C# programming language.
 
 ## Requirements
