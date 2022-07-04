@@ -4,10 +4,27 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackageId>KubewardenPolicySDK</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Flavio Castelli</Authors>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition= " '$(Configuration)' == 'Debug' ">
     <DocumentationFile>bin\Debug\net7.0\KubewardenPolicySDK.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Add README.md to nuget gallery -->
+    <None Include="README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
+    <ItemGroup>
+      <_PackageFiles Include="build\**" BuildAction="Content" PackagePath="build" />
+    </ItemGroup>
+  </Target>
 
 </Project>
