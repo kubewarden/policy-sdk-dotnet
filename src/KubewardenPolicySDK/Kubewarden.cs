@@ -86,7 +86,7 @@ public class Kubewarden
   {
     var response = new SettingsValidationResponse
     {
-      Valid = true,
+      Valid = false,
       Message = message,
     };
 
