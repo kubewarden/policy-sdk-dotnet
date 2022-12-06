@@ -4,16 +4,13 @@
 >
 > This code leverages [`dot-net-wasi-sdk`](https://github.com/SteveSandersonMS/dotnet-wasi-sdk),
 > which is currently marked as experimental.
->
-> It also requires usage of .NET 7, which is currently in preview.
 
 This repository provides a SDK that can be used to write [Kubewarden Policies](https://kubewarden.io)
 using the C# programming language.
 
 ## Requirements
 
-The code requires .NET 7, which is currently (as of July 2022) in preview mode.
-Executing `dotnet --version` should return `7.0.100-preview.4` or later.
+The code requires .NET 7.
 
 ## Repository layout
 
