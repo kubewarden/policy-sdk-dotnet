@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="KubernetesClient.Models" Version="8.0.68" />
+    <PackageReference Include="KubernetesClient.Models" Version="11.0.21" />
     <ProjectReference Include="..\MyFirstKubewardenPolicy\MyFirstKubewardenPolicy.csproj" />
     <ProjectReference Include="..\..\src\KubewardenPolicySDK\KubewardenPolicySDK.csproj" />
   </ItemGroup>
