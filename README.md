@@ -1,3 +1,5 @@
+[![Incubating](https://img.shields.io/badge/status-incubating-orange?style=for-the-badge)](https://github.com/kubewarden/community/blob/main/REPOSITORIES.md#incubating)
+
 # Kubewarden .NET Policy SDK
 
 >⚠️ **Warning: experimental** ⚠️
