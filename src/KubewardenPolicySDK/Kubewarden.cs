@@ -1,7 +1,12 @@
 ﻿namespace KubewardenPolicySDK;
 
+using k8s.Models;
+using k8s;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using WapcGuest;
+using System.Reflection;
 
 /// <summary>
 /// Set of helper methods used to write Kubewarden policies.
@@ -112,5 +117,116 @@ public class Kubewarden
     string protocol_version = "v1";
     return JsonSerializer.SerializeToUtf8Bytes(protocol_version);
   }
+
+    /// <summary>
+    /// Invokes the `list_resources` capability of the host
+    /// </summary>
+    /// <param name="labelSelector"></param>
+    /// <param name="fieldSelector"></param>
+    public static KubernetesList<T>? ListResourcesAll<T>(string labelSelector, string fieldSelector) where T : class, IKubernetesObject
+    {
+        var input = JsonSerializer.Serialize(new
+        {
+            api_version = ExtractAPIVersion<T>(),
+            kind = ExtractKubeKind<T>(),
+            label_selector = labelSelector,
+            field_selector = fieldSelector
+        });
+
+        var resp = Wapc.HostCall("kubewarden", "kubernetes", "list_resources_all", Encoding.UTF8.GetBytes(input));
+        var responseString = Encoding.UTF8.GetString(resp);
+        if (String.IsNullOrEmpty(responseString))
+        {
+            return null;
+        }
+        try
+        {
+            return JsonSerializer.Deserialize<KubernetesList<T>>(responseString);
+        }
+        catch (JsonException e)
+        {
+            throw new JsonException($"Error deserializing response: {resp}", e);
+        }
+    }
+
+    /// <summary>
+    /// Invokes the `list_resources_by_namespace` capability of the host
+    /// </summary>
+    /// <param name="labelSelector"></param>
+    /// <param name="fieldSelector"></param>
+    /// <param name="k8sNamespace"></param>
+    public static KubernetesList<T>? ListResourcesByNamespace<T>(string k8sNamespace, string labelSelector, string fieldSelector) where T : class, IKubernetesObject
+    {
+        var input = JsonSerializer.Serialize(new
+        {
+            api_version = ExtractAPIVersion<T>(),
+            kind = ExtractKubeKind<T>(),
+            label_selector = labelSelector,
+            field_selector = fieldSelector,
+            @namespace = k8sNamespace
+        });
+
+        var resp = Wapc.HostCall("kubewarden", "kubernetes", "list_resources", Encoding.UTF8.GetBytes(input));
+        var responseString = Encoding.UTF8.GetString(resp);
+        if (String.IsNullOrEmpty(responseString))
+        {
+            return null;
+        }
+        try
+        {
+            return JsonSerializer.Deserialize<KubernetesList<T>>(responseString);
+        }
+        catch (JsonException e)
+        {
+            throw new JsonException($"Error deserializing response: {resp}", e);
+        }
+    }
+
+    /// <summary>
+    /// Invokes the `list_resources_by_namespace` capability of the host
+    /// </summary>
+    /// <param name="k8sNamespace"></param>
+    /// <param name="name"></param>
+    /// <param name="disable_cache"></param>
+    public static T? GetResource<T>(string k8sNamespace, string name, bool disable_cache) where T : class, IKubernetesObject
+    {
+        var input = JsonSerializer.Serialize(new
+        {
+            api_version = ExtractAPIVersion<T>(),
+            kind = ExtractKubeKind<T>(),
+            @namespace = k8sNamespace,
+            name = name,
+            disable_cache = disable_cache
+        });
+
+        var resp = Wapc.HostCall("kubewarden", "kubernetes", "get_resource", Encoding.UTF8.GetBytes(input));
+        var responseString = Encoding.UTF8.GetString(resp);
+        if (String.IsNullOrEmpty(responseString))
+        {
+            return null;
+        }
+        try
+        {
+            return JsonSerializer.Deserialize<T>(responseString);
+        }
+        catch (JsonException e)
+        {
+            throw new JsonException($"Error deserializing response: {resp}", e);
+        }
+    }
+
+    private static string ExtractKubeKind<T>() where T : IKubernetesObject
+    {
+        var type = typeof(T);
+        var kea = type.GetCustomAttribute<KubernetesEntityAttribute>();
+        return kea?.Kind ?? type.Name;
+    }
+
+    private static string ExtractAPIVersion<T>() where T : IKubernetesObject
+    {
+        var type = typeof(T);
+        var kea = type.GetCustomAttribute<KubernetesEntityAttribute>();
+        return kea?.ApiVersion ?? type.Name;
+    }
 }
 
