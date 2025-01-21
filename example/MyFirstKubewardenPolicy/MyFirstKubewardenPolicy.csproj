@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="KubernetesClient" Version="15.0.1" />
+    <PackageReference Include="KubernetesClient" Version="16.0.2" />
     <PackageReference Include="WapcGuest" Version="0.1.1" />
     <PackageReference Include="Wasi.Sdk" Version="0.1.1" />
 
