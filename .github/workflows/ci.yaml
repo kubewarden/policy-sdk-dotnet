@@ -27,7 +27,7 @@ jobs:
           include-prerelease: true
       -
         name: Install dependencies
-        uses: kubewarden/github-actions/policy-gh-action-dependencies@d849020c9137340c2373d1cbc9cc571b2b18c17e # v2
+        uses: kubewarden/github-actions/policy-gh-action-dependencies@94f75c7e0e97f721d670270351bf391cb0ccdd2f # v2.0.5
       - name: Run e2e tests
         run: |
           cd example/MyFirstKubewardenPolicy
