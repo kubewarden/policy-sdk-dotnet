@@ -1,0 +1,23 @@
+rules:
+- apiGroups: [""]
+  apiVersions: ["v1"]
+  resources: ["Pods"]
+  operations: ["CREATE", "UPDATE"]
+mutating: true
+contextAwareResources:
+  - apiVersion: v1
+    kind: Pod
+  - apiVersion: v1
+    kind: Namespace
+  - apiVersion: v1
+    kind: ConfigMap
+annotations:
+  io.kubewarden.policy.title: host-capabilities-policy
+  io.kubewarden.policy.description: Demonstrate how to use host capabilities to examine cluster objects and reject them if they don't meet certain criteria.
+  io.kubewarden.policy.author: Zach Brown
+  io.kubewarden.policy.url: https://github.com/kubewarden
+  io.kubewarden.policy.source: https://github.com/kubewarden
+  io.kubewarden.policy.license: Apache-2.0
+  io.kubewarden.policy.usage: |
+    This policy demonstrates leveraging host capabilities/contextAware policies to deny select pods
+    
