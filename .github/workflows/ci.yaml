@@ -9,8 +9,8 @@ jobs:
     name: Test suite of example policy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: '8.0.x'
           include-prerelease: true
@@ -20,14 +20,14 @@ jobs:
     name: Run e2e tests of the example policy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: '8.0.x'
           include-prerelease: true
       -
         name: Install dependencies
-        uses: kubewarden/github-actions/policy-gh-action-dependencies@f1695ca9a575bf58b85d6c3652c7ff7d1d12ec24 # v4.5.16
+        uses: kubewarden/github-actions/policy-gh-action-dependencies@143b9e4b11ddc47370482267383586e6f1bc7efe # v7.0.1
       - name: Run e2e tests
         run: |
           cd example/MyFirstKubewardenPolicy
